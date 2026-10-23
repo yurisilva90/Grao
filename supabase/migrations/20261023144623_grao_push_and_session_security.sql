@@ -1,0 +1,20 @@
+create schema if not exists grao_private;
+revoke all on schema grao_private from public,anon;
+grant usage on schema grao_private to service_role,authenticated;
+create table grao_private.worker_config(id boolean primary key default true check(id),config jsonb not null);
+revoke all on grao_private.worker_config from public,anon,authenticated;
+grant select on grao_private.worker_config to service_role;
+create function public.grao_worker_config() returns jsonb language sql security invoker set search_path='' as $$select config from grao_private.worker_config where id=true$$;
+revoke all on function public.grao_worker_config() from public,anon,authenticated;
+grant execute on function public.grao_worker_config() to service_role;
+create function grao_private.active_session() returns boolean language sql stable security definer set search_path='' as $$
+ select auth.uid() is not null and exists(select 1 from auth.sessions where user_id=auth.uid() and id::text=auth.jwt()->>'session_id');
+$$;
+revoke all on function grao_private.active_session() from public,anon;
+grant execute on function grao_private.active_session() to authenticated;
+create policy live_document_session on public.grao_documents as restrictive for all to authenticated using(grao_private.active_session()) with check(grao_private.active_session());
+create policy live_push_session on public.grao_push_subscriptions as restrictive for all to authenticated using(grao_private.active_session()) with check(grao_private.active_session());
+create policy live_grao_file_session on storage.objects as restrictive for all to authenticated using(bucket_id<>'grao-files' or grao_private.active_session()) with check(bucket_id<>'grao-files' or grao_private.active_session());
+create policy delivery_service on public.grao_push_deliveries for all to service_role using(true) with check(true);
+create extension if not exists pg_cron with schema pg_catalog;
+create extension if not exists pg_net with schema extensions;

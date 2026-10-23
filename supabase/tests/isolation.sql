@@ -1,0 +1,25 @@
+begin;
+insert into auth.users(id,email) values('11111111-1111-4111-8111-111111111111','grao-test-a@example.invalid'),('22222222-2222-4222-8222-222222222222','grao-test-b@example.invalid');
+insert into auth.sessions(id,user_id) values('33333333-3333-4333-8333-333333333333','11111111-1111-4111-8111-111111111111'),('44444444-4444-4444-8444-444444444444','22222222-2222-4222-8222-222222222222');
+insert into public.grao_documents(user_id,payload) values('22222222-2222-4222-8222-222222222222','{"schema":3,"lists":[],"tasks":[],"entries":[],"logs":[],"events":[],"settings":{}}');
+set local role authenticated;
+select set_config('request.jwt.claims','{"sub":"11111111-1111-4111-8111-111111111111","session_id":"33333333-3333-4333-8333-333333333333","role":"authenticated"}',true);
+do $$ declare count_rows integer; rev bigint; begin
+ if not public.grao_live_session() then raise exception 'Valid session rejected'; end if;
+ select count(*) into count_rows from public.grao_documents;
+ if count_rows<>0 then raise exception 'Cross-account read';end if;
+ rev:=public.grao_save_document('{"schema":3,"lists":[],"tasks":[],"entries":[],"logs":[],"events":[],"settings":{}}',0);
+ if rev<>1 then raise exception 'Unexpected revision';end if;
+ begin perform public.grao_save_document('{"schema":3}',0);raise exception 'Expected conflict';exception when serialization_failure then null;end;
+ update public.grao_documents set payload='{"schema":3}' where user_id='22222222-2222-4222-8222-222222222222';
+ get diagnostics count_rows = row_count;if count_rows<>0 then raise exception 'Cross-account update';end if;
+ if has_function_privilege('authenticated','public.grao_worker_config()','EXECUTE') then raise exception 'Worker credentials exposed';end if;
+ if has_table_privilege('anon','public.grao_documents','SELECT') then raise exception 'Anonymous data access';end if;
+end $$;
+reset role;
+delete from auth.sessions where id='33333333-3333-4333-8333-333333333333';
+set local role authenticated;
+do $$ begin if public.grao_live_session() then raise exception 'Revoked session accepted';end if;if exists(select 1 from public.grao_documents) then raise exception 'Revoked session can read';end if;end $$;
+reset role;
+rollback;
+select 'RLS isolation, revision conflict, private credentials and revoked session checks passed' as result;

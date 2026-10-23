@@ -1,0 +1,20 @@
+{
+  "name": "grao",
+  "private": true,
+  "version": "0.3.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "build": "node scripts/build.mjs",
+    "check": "node --check src/domain.js && node --check src/app.js && node --check src/cloud.js",
+    "test:browser": "playwright test"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.118.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1",
+    "esbuild": "0.25.12",
+    "web-push": "3.6.7"
+  }
+}
