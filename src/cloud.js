@@ -6,6 +6,7 @@ const sessionStorageAdapter={getItem(key){return localStorage.getItem('grao-reme
 export const client=createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{flowType:'implicit',storage:sessionStorageAdapter,persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
 export async function passwordSignIn(email,password,remember=true){localStorage.setItem('grao-remember',String(remember));const {data,error}=await client.auth.signInWithPassword({email,password});if(error)throw error;return data.user}
 export async function register(name,email,password){const {data,error}=await client.auth.signUp({email,password,options:{data:{full_name:name},emailRedirectTo:new URL('./',location.href).href}});if(error)throw error;return data}
+export async function resendConfirmation(email){const {error}=await client.auth.resend({type:'signup',email,options:{emailRedirectTo:new URL('./',location.href).href}});if(error)throw error}
 export async function recoverPassword(email){const {error}=await client.auth.resetPasswordForEmail(email,{redirectTo:new URL('./',location.href).href});if(error)throw error}
 export async function updatePassword(password){const {data,error}=await client.auth.updateUser({password});if(error)throw error;return data.user}
 export async function updateName(name){const {error}=await client.auth.updateUser({data:{full_name:name}});if(error)throw error}
