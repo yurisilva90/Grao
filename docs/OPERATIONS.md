@@ -26,4 +26,4 @@ Documentos, subscrições e arquivos exigem proprietário e sessão ativa. Emoç
 
 ## Versões e incidentes
 
-Frontend: reverter o commit e publicar pelo Actions. Backend: alterações de banco não são revertidas pelo frontend; avaliar compatibilidade antes de reverter. Não executar migrations novamente sobre o projeto existente sem conferir supabase_migrations.schema_migrations. As migrations locais documentam o SQL aplicado via MCP; o timestamp local pode diferir do registrado pelo serviço.
+Frontend: reverter o commit e publicar pelo Actions. Backend: alterações de banco não são revertidas pelo frontend; avaliar compatibilidade antes de reverter. Não executar migrations novamente sobre o projeto existente sem conferir supabase_migrations.schema_migrations. Os nomes e versões das migrations foram alinhados ao histórico retornado pelo serviço após a criação pelo CLI.
