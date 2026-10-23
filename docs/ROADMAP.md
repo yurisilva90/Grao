@@ -5,6 +5,7 @@ Objetivo: uso pessoal confiável antes de convidados e monetização. Repositór
 ## Contrato de produto
 
 - Área → checklist → demanda → subtarefa; pagamento vinculado sem duplicação.
+- Login por e-mail e senha, cadastro, recuperação e sessão persistente. Telas internas bloqueadas sem autenticação.
 - Menu inferior, cards recolhíveis, círculos discretos, marca Georgia Bold e paleta aprovada.
 - Rotina separada de demandas, datas absolutas, sem históricos fictícios.
 - Finanças manuais em BRL, planos e reflexões bíblicas, emoções privadas.

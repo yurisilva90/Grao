@@ -2,7 +2,14 @@ import {createClient} from '@supabase/supabase-js';
 import {SUPABASE_URL,SUPABASE_KEY} from './config.js';
 import {validateState} from './domain.js';
 import {getFile} from './storage.js';
-export const client=createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{flowType:'pkce',persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+const sessionStorageAdapter={getItem(key){return localStorage.getItem('grao-remember')==='false'?sessionStorage.getItem(key):localStorage.getItem(key)},setItem(key,value){const remember=localStorage.getItem('grao-remember')!=='false';(remember?localStorage:sessionStorage).setItem(key,value);(remember?sessionStorage:localStorage).removeItem(key)},removeItem(key){localStorage.removeItem(key);sessionStorage.removeItem(key)}};
+export const client=createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{flowType:'implicit',storage:sessionStorageAdapter,persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+export async function passwordSignIn(email,password,remember=true){localStorage.setItem('grao-remember',String(remember));const {data,error}=await client.auth.signInWithPassword({email,password});if(error)throw error;return data.user}
+export async function register(name,email,password){const {data,error}=await client.auth.signUp({email,password,options:{data:{full_name:name},emailRedirectTo:new URL('./',location.href).href}});if(error)throw error;return data}
+export async function recoverPassword(email){const {error}=await client.auth.resetPasswordForEmail(email,{redirectTo:new URL('./',location.href).href});if(error)throw error}
+export async function updatePassword(password){const {data,error}=await client.auth.updateUser({password});if(error)throw error;return data.user}
+export async function updateName(name){const {error}=await client.auth.updateUser({data:{full_name:name}});if(error)throw error}
+
 export async function currentUser(){const {data,error}=await client.auth.getUser();if(error)return null;return data.user}
 export async function signIn(email){const {error}=await client.auth.signInWithOtp({email,options:{emailRedirectTo:new URL('./',location.href).href}});if(error)throw error}
 export async function signOut(){const {error}=await client.auth.signOut();if(error)throw error}

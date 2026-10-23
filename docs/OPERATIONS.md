@@ -2,6 +2,8 @@
 
 ## Conta e e-mail
 
+Acesso por e-mail e senha. Cadastro e recuperação usam o fluxo padrão de confirmação do Supabase. Sessão persistida no aparelho por padrão, com renovação automática; desmarcar Manter conectado limita a sessão à aba. Nenhuma senha é gravada no código do aplicativo.
+
 Projeto: ljjrrabjujmcgdzrxnhu, organização yurisilva1990, região sa-east-1.
 Em Auth → URL Configuration, Site URL e Redirect URLs devem permitir `https://yurisilva90.github.io/Grao/`. Esta configuração depende do painel e não é oferecida pelas ferramentas da sessão. Verificar remetente/SMTP e limites de envio antes de convidar usuários fora da equipe. Não registrar códigos, tokens ou conteúdo de e-mails em issues.
 
@@ -12,7 +14,7 @@ Na conta/preferências, Exportar dados gera JSON com registros e bytes dos anexo
 
 ## Sincronização
 
-Cada usuário possui um documento com revisão monotônica. O RPC de gravação verifica a revisão e detecta alterações simultâneas. Em conflito, o app preserva o formulário, bloqueia gravações e oferece exportar/recarregar; não substitui o servidor silenciosamente. Leitura usa cache; alterações na conta exigem conexão. O modo local continua disponível. Ao sair, o cache de registros daquela conta é removido.
+Cada usuário possui um documento com revisão monotônica. O RPC de gravação verifica a revisão e detecta alterações simultâneas. Em conflito, o app preserva o formulário, bloqueia gravações e oferece exportar/recarregar; não substitui o servidor silenciosamente. Leitura usa cache; alterações na conta exigem conexão. As telas do sistema só ficam disponíveis após autenticação; dados locais antigos são oferecidos para importação após entrar. Ao sair, o cache de registros daquela conta é removido.
 
 ## Lembretes
 
