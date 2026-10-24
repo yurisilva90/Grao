@@ -1,6 +1,8 @@
-# Estado da implementação — 23/10/2026
+# Estado da implementação — 24/10/2026
 
 ## Implementado
+
+- Agenda real na navegação: lista por dia, calendário mensal, seleção de data/mês, filtros e criação/edição/exclusão de compromissos. Dados sincronizados no documento privado e incluídos nos backups; finanças vinculadas sem duplicação. Google Agenda via evento preenchido para confirmação pelo usuário; OAuth e sincronização automática pendentes.
 
 - Edição, exclusão confirmada, arquivamento e ordenação de checklists/demandas; subtarefas editáveis, busca e filtros.
 - Datas absolutas e migração assistida dos registros antigos, com IDs estáveis e sem apagar a origem.
@@ -16,8 +18,8 @@ Perfil simplificado: nome, áreas e notificações; sem campo de fuso nem import
 
 ## Verificado automaticamente
 
-- 20 testes de regras: dinheiro, parcelas, datas, rotina, migração, idempotência e agendamento por fuso.
-- 15 fluxos de navegador em viewport móvel: criação/edição, finanças, migração, privacidade das emoções e backup/restauração de anexos em outro contexto.
+- 22 testes de regras: dinheiro, parcelas, datas, rotina, migração, idempotência e agendamento por fuso.
+- 17 fluxos de navegador em viewport móvel: criação/edição, finanças, migração, privacidade das emoções e backup/restauração de anexos em outro contexto.
 - Teste transacional de banco: isolamento entre duas identidades, conflito de revisão e negação após revogar sessão.
 - Assessor de segurança Supabase sem alertas; cron com HTTP 200.
 - Dependências de produção sem vulnerabilidades conhecidas no npm audit.
