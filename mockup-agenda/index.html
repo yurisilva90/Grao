@@ -1,20 +1,23 @@
 <!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f7f7f2"><title>Agenda · Grão</title><link rel="icon" href="../icon-g-grain.svg"><link rel="stylesheet" href="agenda.css"></head>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f7f7f2"><title>Agenda · Grão</title><link rel="icon" href="../icon-g-grain.svg"><link rel="stylesheet" href="agenda.css?v=3"></head>
 <body>
 <main>
   <header class="topbar"><a class="brand" href="../" aria-label="Grão">grão<svg viewBox="-80 -90 160 180" aria-hidden="true"><g transform="rotate(38)"><path d="M0 -75 C-43 -42 -43 42 0 75 C43 42 43 -42 0 -75Z" fill="#87965b"/><path d="M0 -55 C-8 -16 -6 22 0 56 C6 17 8 -20 0 -55Z" fill="#f7f7f2"/></g></svg></a><button class="avatar" aria-label="Preferências da agenda" data-action="settings">YS</button></header>
-  <section class="intro"><div><p class="eyebrow">UM DIA DE CADA VEZ</p><h1>Sua agenda.</h1></div><button class="icon-button" data-action="settings" aria-label="Configurar Google Agenda" data-icon="calendar"></button></section>
-  <div class="month-heading"><h2>Outubro <span>2026</span></h2><button data-action="today" class="today-button">Hoje</button></div>
+  <section class="intro"><div><p class="eyebrow">UM DIA DE CADA VEZ</p><h1>Sua agenda.</h1></div><button class="icon-button" data-action="calendar" aria-label="Escolher mês e data" data-icon="calendar"></button></section>
+  <div class="month-heading"><h2 id="month-label"></h2><button data-action="today" class="today-button">Hoje</button></div>
+  <div class="agenda-tools"><div class="view-switch" aria-label="Visualização da agenda"><button data-view="list" class="selected" aria-pressed="true">Lista</button><button data-view="month" aria-pressed="false">Mês</button></div><button class="google-setup" data-action="settings"><b aria-hidden="true">G</b><span>Configurar Google Agenda</span></button></div>
   <nav class="date-strip" aria-label="Dias da semana" id="date-strip"></nav>
   <div class="day-summary"><div><span class="summary-dot"></span><strong id="summary-count"></strong><span>hoje</span></div><span id="summary-money"></span></div>
   <nav class="filters" aria-label="Filtrar agenda"><button class="selected" data-filter="all" aria-pressed="true">Tudo</button><button data-filter="event" aria-pressed="false">Compromissos</button><button data-filter="payment" aria-pressed="false">Financeiro</button></nav>
+  <section id="month-view" class="month-view" aria-label="Calendário mensal" hidden></section>
   <div class="timeline" id="timeline"></div>
 </main>
 <nav class="bottom-nav" aria-label="Menu principal"><a href="../" data-icon="home">Início</a><a href="../" data-icon="check">Rotina</a><button class="active" data-action="today" data-icon="calendar" aria-current="page">Agenda</button><a href="../" data-icon="clock">Pendências</a><button data-action="menu" data-icon="menu" aria-haspopup="dialog">Menu</button></nav>
 <button class="fab" data-action="create" aria-label="Criar compromisso ou pagamento" aria-controls="create-options" aria-expanded="false">+</button>
 <div class="create-options" id="create-options" hidden><button data-new="event"><span data-icon="calendar"></span>Compromisso</button><button data-new="payment"><span data-icon="wallet"></span>Pagamento</button></div>
 <dialog id="drawer" class="drawer" aria-labelledby="drawer-title"><header><span class="brand">grão</span><button class="icon-button" data-close="drawer" aria-label="Fechar menu">×</button></header><h2 id="drawer-title">Áreas da vida</h2><nav id="area-links"></nav><a class="back-app" href="../">Abrir meu Grão <span>›</span></a></dialog>
+<dialog id="calendar-picker" class="sheet" aria-labelledby="picker-title"><header><h2 id="picker-title">Escolher data</h2><button class="icon-button" data-close="calendar-picker" aria-label="Fechar calendário">×</button></header><div class="sheet-body"><label class="field">Mês e ano<input type="month" id="picker-month" aria-label="Escolher mês e ano"></label><div id="picker-grid"></div></div><footer><button class="primary" data-action="picker-today">Ir para hoje</button></footer></dialog>
 <dialog id="editor" class="sheet" aria-labelledby="editor-title"></dialog>
 <dialog id="settings" class="sheet" aria-labelledby="settings-title"><header><div><p class="eyebrow">CONECTAR AGENDAS</p><h2 id="settings-title">Google Agenda</h2></div><button class="icon-button" data-close="settings" aria-label="Fechar">×</button></header><div class="sheet-body"><div class="google-card"><span class="google-g">G</span><div><strong>Seus compromissos, juntos.</strong><p>Escolha quais eventos levar para o Google Agenda.</p></div></div><label class="switch-row"><span><strong>Usar Google Agenda</strong><small>Ativar a opção nos compromissos</small></span><input type="checkbox" id="google-preference" role="switch"></label><div class="preference-note"><span data-icon="check"></span><p>Você escolhe em cada compromisso.<br>Pagamentos continuam só no Grão.</p></div></div><footer><button class="primary" data-close="settings">Concluir</button></footer></dialog>
-<div id="toast" role="status"></div><script type="module" src="agenda.js"></script>
+<div id="toast" role="status"></div><script type="module" src="agenda.js?v=3"></script>
 </body></html>
