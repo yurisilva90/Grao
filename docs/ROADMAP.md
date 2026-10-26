@@ -26,6 +26,10 @@ Objetivo: uso pessoal confiável antes de convidados e monetização. Repositór
 
 Status das issues: Backlog → Próxima → Em desenvolvimento → Em validação → Concluída. Bloqueado é sinalizado no corpo da issue. Uma entrega principal por vez. Concluída exige implementação, verificação e publicação. O estado efetivamente entregue é registrado em STATUS.md; recursos dependentes de credenciais, serviços e validação manual não recebem status de concluídos antecipadamente.
 
+## Próxima evolução: listas configuráveis
+
+Plano detalhado em [LISTAS-CONFIGURAVEIS.md](LISTAS-CONFIGURAVEIS.md). Nomenclatura proposta: Área → lista → item → subitem; modelos opcionais e até três campos extras. Vínculo financeiro explícito, desligado em novos itens, com conclusão separada de pagamento. O contrato atual acima descreve o sistema publicado; a evolução ainda está em planejamento.
+
 ## Expansões
 
 Integração bancária, sensores, texto bíblico integral, colaboração e IA ficam fora da primeira versão. Monetização exige validação do teste com convidados, definição de preço, suporte e cobrança.
