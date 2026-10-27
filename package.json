@@ -6,7 +6,7 @@
   "scripts": {
     "test": "node --test tests/*.test.js",
     "build": "node scripts/build.mjs",
-    "check": "node --check src/domain.js && node --check src/app.js && node --check src/cloud.js && node --check src/auth.js && node --check src/agenda.js",
+    "check": "node --check src/domain.js && node --check src/app.js && node --check src/cloud.js && node --check src/auth.js && node --check src/agenda.js && node --check src/lists.js && node --check src/list-domain.js",
     "test:browser": "playwright test"
   },
   "dependencies": {

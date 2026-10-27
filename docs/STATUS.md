@@ -1,6 +1,11 @@
-# Estado da implementação — 24/10/2026
+# Estado da implementação — 26/10/2026
 
 ## Implementado
+
+- Listas configuráveis com oito modelos: Em branco, Checklist, Rotina, Treino, Compras, Contas e pagamentos, Projeto e Estudos. Até três campos: texto, número, reais, data (informativa/prazo), seleção, sim/não e link. Edição/ordem de campos, prévia, totais monetários, status e subitens; links http/https.
+- Menu + com quatro ações e ícones SVG: Lista, Item, Compromisso e Lançamento, sem cabeçalho.
+- Vínculo financeiro explícito desligado nos novos itens, independente da conclusão. Atualização pelo Financeiro, lançamento único por item, desvinculação e exclusão com escolha de manter o lançamento; itens arquivados preservam o histórico financeiro.
+- Migração incremental listSchema=1 dentro do documento schema=3 (compatível com o banco existente); cópia anterior no armazenamento privado do aparelho até logout, IDs/saldos preservados e versões futuras recusadas. Exportação/importação inclui campos, valores e vínculos.
 
 - Agenda real na navegação: lista por dia, calendário mensal, seleção de data/mês, filtros e criação/edição/exclusão de compromissos. Dados sincronizados no documento privado e incluídos nos backups; finanças vinculadas sem duplicação. Google Agenda via evento preenchido para confirmação pelo usuário; OAuth e sincronização automática pendentes.
 
@@ -18,8 +23,8 @@ Perfil simplificado: nome, áreas e notificações; sem campo de fuso nem import
 
 ## Verificado automaticamente
 
-- 22 testes de regras: dinheiro, parcelas, datas, rotina, migração, idempotência e agendamento por fuso.
-- 17 fluxos de navegador em viewport móvel: criação/edição, finanças, migração, privacidade das emoções e backup/restauração de anexos em outro contexto.
+- 30 testes de regras: dinheiro, parcelas, datas, rotina, migração, idempotência e agendamento por fuso.
+- 20 fluxos de navegador em viewport móvel: criação/edição, finanças, migração, privacidade das emoções e backup/restauração de anexos em outro contexto.
 - Teste transacional de banco: isolamento entre duas identidades, conflito de revisão e negação após revogar sessão.
 - Assessor de segurança Supabase sem alertas; cron com HTTP 200.
 - Dependências de produção sem vulnerabilidades conhecidas no npm audit.
@@ -27,8 +32,8 @@ Perfil simplificado: nome, áreas e notificações; sem campo de fuso nem import
 ## Em validação / dependências reais
 
 - Configurar Site URL e Redirect URLs do Auth no painel Supabase para https://yurisilva90.github.io/Grao/; solicitação enviada ao proprietário.
-- Conta do proprietário criada pelo cadastro padrão; aguardando confirmação por e-mail. Primeiro login real, remetente/SMTP, sincronização em dois aparelhos e fluxo completo de exclusão ainda em validação.
-- Os 15 testes de navegador usam respostas controladas do Auth/Storage para validar telas e persistência, sem usar credenciais do proprietário.
+- Conta do proprietário confirmada e login por senha verificado. Remetente/SMTP, sincronização em dois aparelhos e fluxo completo de exclusão ainda em validação.
+- Os 20 testes de navegador usam respostas controladas do Auth/Storage para validar telas e persistência, sem usar credenciais do proprietário.
 - Web Push real no iPhone instalado: autorização, permissão negada, reagendamento e recebimento. Servidor ativo não comprova entrega ao aparelho.
 - Uso diário, contraste/legibilidade e interações com teclado/câmera no iPhone real.
 - Agendamento automático de backups externos e recuperação integral do projeto não configurados; exportação manual completa está disponível e foi testada.

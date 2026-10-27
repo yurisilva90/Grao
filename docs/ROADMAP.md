@@ -4,7 +4,7 @@ Objetivo: uso pessoal confiável antes de convidados e monetização. Repositór
 
 ## Contrato de produto
 
-- Área → checklist → demanda → subtarefa; pagamento vinculado sem duplicação.
+- Área → lista → item → subitem; modelos e campos configuráveis; vínculo financeiro opcional, sem duplicação e independente da conclusão.
 - Login por e-mail e senha, cadastro, recuperação e sessão persistente. Telas internas bloqueadas sem autenticação.
 - Menu inferior, cards recolhíveis, círculos discretos, marca Georgia Bold e paleta aprovada.
 - Rotina separada de demandas, datas absolutas, sem históricos fictícios.
@@ -26,9 +26,9 @@ Objetivo: uso pessoal confiável antes de convidados e monetização. Repositór
 
 Status das issues: Backlog → Próxima → Em desenvolvimento → Em validação → Concluída. Bloqueado é sinalizado no corpo da issue. Uma entrega principal por vez. Concluída exige implementação, verificação e publicação. O estado efetivamente entregue é registrado em STATUS.md; recursos dependentes de credenciais, serviços e validação manual não recebem status de concluídos antecipadamente.
 
-## Próxima evolução: listas configuráveis
+## Listas configuráveis
 
-Plano detalhado em [LISTAS-CONFIGURAVEIS.md](LISTAS-CONFIGURAVEIS.md). Nomenclatura proposta: Área → lista → item → subitem; modelos opcionais e até três campos extras. Vínculo financeiro explícito, desligado em novos itens, com conclusão separada de pagamento. O contrato atual acima descreve o sistema publicado; a evolução ainda está em planejamento.
+Plano de referência em [LISTAS-CONFIGURAVEIS.md](LISTAS-CONFIGURAVEIS.md). Nomenclatura implementada: Área → lista → item → subitem; modelos opcionais e até três campos extras. Vínculo financeiro explícito, desligado em novos itens, com conclusão separada de pagamento. Implementação registrada em STATUS.md. Sincronização automática com Google permanece separada deste escopo.
 
 ## Expansões
 

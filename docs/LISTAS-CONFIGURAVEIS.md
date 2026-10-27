@@ -1,6 +1,6 @@
 # Listas configuráveis — plano de implementação
 
-Data: 26/10/2026. Estado: planejamento; a aplicação publicada ainda usa checklists/demandas.
+Data: 26/10/2026. Estado: implementado em 26/10/2026; validação no celular real em andamento. O texto abaixo preserva o plano de referência. A implementação usa listSchema=1 dentro do documento schema=3, com cópia local pré-migração; alterações de tipo em campos preenchidos são bloqueadas para preservar valores. Google continua com envio para confirmação, sem OAuth/sincronização automática.
 
 ## Objetivo e decisões
 
